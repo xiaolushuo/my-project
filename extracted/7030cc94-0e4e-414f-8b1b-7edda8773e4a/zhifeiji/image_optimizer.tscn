@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bxh0sbtjwnxr7"]
+
+[ext_resource type="Script" path="res://image_optimizer.gd" id="1_2k8mn"]
+
+[node name="ImageOptimizer" type="Node"]
+script = ExtResource("1_2k8mn")

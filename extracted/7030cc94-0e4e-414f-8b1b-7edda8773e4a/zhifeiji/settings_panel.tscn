@@ -1,0 +1,363 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8j3k5l2m8n7p"]
+
+[ext_resource type="Script" path="res://settings_panel.gd" id="1_xxxxx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_xxxxx"]
+bg_color = Color(0.2, 0.2, 0.2, 0.9)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yyyyy"]
+bg_color = Color(0.15, 0.15, 0.15, 0.95)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_zzzzz"]
+bg_color = Color(0.1, 0.1, 0.1, 0.8)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="SettingsPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xxxxx")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_xxxxx")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = null
+theme_override_font_sizes/font_size = 24
+text = "设置"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/Header"]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_zzzzz")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yyyyy")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_xxxxx")
+text = "X"
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Toys" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+
+[node name="Global" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+
+[node name="ToysTab" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+
+[node name="ToySelector" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ToySelector"]
+layout_mode = 2
+text = "选择玩具:"
+
+[node name="ToyTypeOption" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ToySelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="EnabledCheck" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ToySelector"]
+layout_mode = 2
+text = "启用"
+button_pressed = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ToySettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="MassControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/MassControl"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "质量:"
+
+[node name="MassSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/MassControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+min_value = 0.01
+max_value = 2.0
+step = 0.01
+value = 0.1
+
+[node name="MassValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/MassControl"]
+layout_mode = 2
+text = "0.10"
+
+[node name="BounceControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/BounceControl"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "弹性:"
+
+[node name="BounceSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/BounceControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+max_value = 1.0
+step = 0.01
+value = 0.6
+
+[node name="BounceValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/BounceControl"]
+layout_mode = 2
+text = "0.60"
+
+[node name="FrictionControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/FrictionControl"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "摩擦力:"
+
+[node name="FrictionSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/FrictionControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+max_value = 1.0
+step = 0.01
+value = 0.3
+
+[node name="FrictionValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/FrictionControl"]
+layout_mode = 2
+text = "0.30"
+
+[node name="AngularDampControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/AngularDampControl"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "角阻尼:"
+
+[node name="AngularDampSlider" type="HSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/AngularDampControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+max_value = 10.0
+step = 0.1
+value = 2.0
+
+[node name="AngularDampValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/AngularDampControl"]
+layout_mode = 2
+text = "2.0"
+
+[node name="StressBallSettings" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SquashThresholdControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/StressBallSettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/StressBallSettings/SquashThresholdControl"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "形变阈值:"
+
+[node name="SquashThresholdSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/StressBallSettings/SquashThresholdControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+min_value = 100.0
+max_value = 1000.0
+step = 10.0
+value = 400.0
+
+[node name="SquashThresholdValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/StressBallSettings/SquashThresholdControl"]
+layout_mode = 2
+text = "400"
+
+[node name="RecoveryTimeControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/StressBallSettings"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/StressBallSettings/RecoveryTimeControl"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "恢复时间:"
+
+[node name="RecoveryTimeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/StressBallSettings/RecoveryTimeControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+min_value = 0.5
+max_value = 10.0
+step = 0.1
+value = 2.5
+
+[node name="RecoveryTimeValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/ToysTab/ScrollContainer/ToySettings/StressBallSettings/RecoveryTimeControl"]
+layout_mode = 2
+text = "2.5s"
+
+[node name="GlobalTab" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 15
+
+[node name="SoundSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SoundEnabled" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/SoundSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/SoundSection/SoundEnabled"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "音效:"
+
+[node name="SoundCheckBox" type="CheckBox" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/SoundSection/SoundEnabled"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+text = "启用音效"
+button_pressed = true
+
+[node name="SoundVolume" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/SoundSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/SoundSection/SoundVolume"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "音量:"
+
+[node name="SoundVolumeSlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/SoundSection/SoundVolume"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+max_value = 1.0
+step = 0.01
+value = 0.8
+
+[node name="SoundVolumeValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/SoundSection/SoundVolume"]
+layout_mode = 2
+text = "80%"
+
+[node name="PhysicsSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="GravityControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/PhysicsSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/PhysicsSection/GravityControl"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "重力:"
+
+[node name="GravitySlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/PhysicsSection/GravityControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+min_value = 0.0
+max_value = 2000.0
+step = 10.0
+value = 980.0
+
+[node name="GravityValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/PhysicsSection/GravityControl"]
+layout_mode = 2
+text = "980"
+
+[node name="WindowSection" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TransparencyControl" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/WindowSection"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/WindowSection/TransparencyControl"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.3
+text = "透明度:"
+
+[node name="TransparencySlider" type="HSlider" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/WindowSection/TransparencyControl"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.7
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="TransparencyValue" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/GlobalTab/WindowSection/TransparencyControl"]
+layout_mode = 2
+text = "100%"
+
+[node name="Buttons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "重置默认"
+
+[node name="ExportButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "导出设置"
+
+[node name="ImportButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "导入设置"
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VBoxContainer/Buttons"]
+layout_mode = 2
+text = "保存设置"

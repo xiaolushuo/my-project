@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cl8yc7qr1qb5x"]
+
+[ext_resource type="Script" path="res://toy.gd" id="1_7nv5h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1u8i0"]
+radius = 32.0
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_1a7gm"]
+bounce = 0.9
+friction = 0.5
+
+[node name="StressBall" type="RigidBody2D"]
+mass = 0.3
+physics_material_override = SubResource("PhysicsMaterial_1a7gm")
+angular_damp = 3.0
+script = ExtResource("1_7nv5h")
+toy_type = "stress_ball"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_1u8i0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.2, 0.2, 1)
