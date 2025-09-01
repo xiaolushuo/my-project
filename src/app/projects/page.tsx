@@ -13,7 +13,9 @@ import {
   Download, 
   Search,
   Plus,
-  ArrowLeft
+  ArrowLeft,
+  Package,
+  Loader2
 } from "lucide-react"
 import { toast } from "@/hooks/use-toast"
 import Link from "next/link"
@@ -34,6 +36,7 @@ export default function ProjectsPage() {
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState("")
   const [deleting, setDeleting] = useState<string | null>(null)
+  const [downloading, setDownloading] = useState<string | null>(null)
 
   useEffect(() => {
     loadProjects()
@@ -86,6 +89,49 @@ export default function ProjectsPage() {
       })
     } finally {
       setDeleting(null)
+    }
+  }
+
+  const downloadProject = async (projectId: string) => {
+    setDownloading(projectId)
+    try {
+      const response = await fetch(`/api/projects/${projectId}/download`, {
+        method: 'POST',
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to download project')
+      }
+
+      // Get the blob from response
+      const blob = await response.blob()
+      
+      // Create download link
+      const url = window.URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = url
+      link.download = `project-${projectId}.zip`
+      
+      // Trigger download
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      
+      // Clean up
+      window.URL.revokeObjectURL(url)
+
+      toast({
+        title: "Success",
+        description: "Project downloaded successfully",
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to download project",
+        variant: "destructive",
+      })
+    } finally {
+      setDownloading(null)
     }
   }
 
@@ -221,6 +267,19 @@ export default function ProjectsPage() {
                             <FolderOpen className="h-4 w-4 mr-2" />
                             Browse
                           </Link>
+                        </Button>
+                        
+                        <Button
+                          variant="outline"
+                          size="sm"
+                          onClick={() => downloadProject(project.id)}
+                          disabled={downloading === project.id}
+                        >
+                          {downloading === project.id ? (
+                            <Loader2 className="h-4 w-4 animate-spin" />
+                          ) : (
+                            <Package className="h-4 w-4" />
+                          )}
                         </Button>
                         
                         <Button
